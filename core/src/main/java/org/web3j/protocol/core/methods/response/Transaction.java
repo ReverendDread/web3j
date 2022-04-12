@@ -303,7 +303,9 @@ public class Transaction {
     // Parity returns a byte value, Geth returns a hex-encoded string
     // https://github.com/ethereum/go-ethereum/issues/3339
     public void setV(Object v) {
-        if (v instanceof String) {
+        if (v == null) {
+            this.v = -1;
+        }else if (v instanceof String) {
             // longValueExact() is not implemented on android 11 or later only on 12 so it was
             // replaced with longValue.
             this.v = Numeric.toBigInt((String) v).longValue();
